@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Muhammad Saim Ayyaz - Full Stack Developer specializing in React, .NET, and QA solutions. View my portfolio and services.">
+  <title>Muhammad Saim Ayyaz's Portfolio</title>
+
+  <!-- favicon -->
+  <link rel="shortcut icon" href="assets/images/slogo.ico" type="image/x-icon">
+
+  <!-- canonical URL -->
+  <link rel="canonical" href="https://saimayyazsheikh.github.io/">
+
+  <!-- google font link -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+
+  <!-- custom css link -->
+  <link href="assets/css/style.css" rel="stylesheet">
+
+  <style>
+    /* Force blog images to show on all screen sizes */
+    .blog-card-banner {
+      display: block !important;
+    }
+
+    /* Responsive grid for blog cards */
+    .blog-card-group {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+      padding: 0 0.5rem;
+    }
+    @media (min-width: 600px) {
+      .blog-card-group {
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+      }
+    }
+    @media (min-width: 1024px) {
+      .blog-card-group {
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 2rem;
+      }
+    }
+    @media (min-width: 1000px) {
+      .blog-card-group {
+        justify-content: center;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2.5rem;
+        max-width: 1200px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .blog-card {
+        max-width: 360px;
+        min-width: 320px;
+        width: 100%;
+        margin: 0 auto;
+      }
+      .blog-card-banner {
+        aspect-ratio: 16/10;
+        min-height: 140px;
+        max-height: 200px;
+      }
+    }
+
+    /* Blog card styles */
+    .blog-card {
+      background: var(--background-primary);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.10);
+      transition: transform 0.3s;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      max-width: 100%;
+      margin: 0 auto;
+    }
+    .blog-card:hover {
+      transform: translateY(-4px);
+    }
+
+    /* Blog card image always visible and responsive */
+    .blog-card-banner {
+      display: block !important;
+      width: 100%;
+      aspect-ratio: 16/9;
+      min-height: 120px;
+      max-height: 220px;
+      overflow: hidden;
+      background: #222;
+    }
+    .blog-banner-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Blog card content */
+    .blog-content-wrapper {
+      padding: 1rem 1.25rem 1.25rem 1.25rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    .blog-topic {
+      margin-bottom: 0.5rem;
+      font-size: 0.85rem;
+      border-radius: 20px;
+      padding: 0.25rem 0.75rem;
+      background: var(--accent);
+      color: #fff;
+      display: inline-block;
+    }
+    .blog-card .h3 {
+      margin: 0.5rem 0 0.75rem 0;
+      font-size: 1.1rem;
+      color: var(--foreground-primary);
+      line-height: 1.3;
+    }
+    .blog-text {
+      color: var(--foreground-secondary);
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+      line-height: 1.5;
+    }
+    .wrapper-flex {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-top: auto;
+    }
+    .profile-wrapper {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .profile-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .wrapper .h4 {
+      font-size: 0.9rem;
+      margin-bottom: 0.15rem;
+    }
+    .text-sm {
+      font-size: 0.8rem;
+      color: var(--foreground-tertiary);
+    }
+    @media (max-width: 400px) {
+      .blog-content-wrapper {
+        padding: 0.75rem 0.5rem 1rem 0.5rem;
+      }
+      .blog-card-banner {
+        min-height: 90px;
+        aspect-ratio: 16/10;
+      }
+    }
+
+    /* Responsive main content and sidebar layout - fix sidebar overlap */
+    .main .container {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+      box-sizing: border-box;
+    }
+    @media (min-width: 1100px) {
+      .main .container {
+        display: grid;
+        grid-template-columns: 1fr minmax(220px, 320px);
+        gap: 2.5rem;
+        align-items: flex-start;
+        max-width: 1200px;
+        width: 100%;
+        padding: 0 2vw;
+      }
+      .aside {
+        max-width: 320px;
+        width: 100%;
+        min-width: 220px;
+        margin: 0;
+        position: static;
+        align-self: start;
+        z-index: 1;
+      }
+    }
+    .aside {
+      width: 100%;
+      max-width: 100vw;
+      min-width: 0;
+      word-break: break-word;
+      overflow-wrap: break-word;
+      margin: 0 auto;
+      box-sizing: border-box;
+    }
+    .aside .wrapper, .aside .topics, .aside .tags, .aside .contact, .aside .newsletter {
+      max-width: 100%;
+      overflow-x: auto;
+    }
+
+    /* Sidebar topic buttons fix */
+    .aside .topics {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      max-width: 100%;
+    }
+    .aside .topic-btn {
+      display: flex;
+      align-items: center;
+      max-width: 100%;
+      min-width: 0;
+      gap: 0.5rem;
+      overflow: hidden;
+      background: var(--background-primary);
+      border-radius: 10px;
+      box-shadow: 0 5px 5px hsla(0, 0%, 0%, 0.05);
+      transition: background 0.2s;
+    }
+    .aside .topic-btn .icon-box {
+      flex-shrink: 0;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: var(--action-primary);
+      color: black;
+      font-size: 22px;
+      border-radius: 10px 0 0 10px;
+    }
+    .aside .topic-btn p {
+      flex: 1 1 0;
+      min-width: 0;
+      padding: 0 1rem;
+      color: var(--foreground-secondary);
+      font-weight: 700;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    @media (max-width: 1300px) {
+      .main .container {
+        max-width: 100vw;
+        padding: 0 1vw;
+      }
+      .aside {
+        max-width: 280px;
+      }
+      .aside .topic-btn .icon-box {
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+      }
+      .aside .topic-btn p {
+        padding: 0 0.5rem;
+        font-size: 0.95rem;
+      }
+    }
+  </style>
+</head>
+
+<body class="light-theme">
+
+  <!-- ======================
+      HEADER SECTION
+  ========================= -->
+  <header>
+    <div class="container">
+      <nav class="navbar">
+        <a href="index.html">
+          <img src="./assets/images/slogo.ico" alt="Muhammad Saim Ayyaz's logo" width="250" height="200" class="logo-light">
+          <img src="./assets/images/slogo.ico" alt="Muhammad Saim Ayyaz's logo" width="250" height="200" class="logo-dark">
+        </a>
+
+        
+
+        <div class="btn-group">
+          <button class="nav-menu-btn" aria-label="Open menu">
+            <ion-icon name="menu-outline"></ion-icon>
+          </button>
+        </div>
+
+        <div class="flex-wrapper">
+          <ul class="desktop-nav">
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="about.html" class="nav-link">About</a></li>
+            <li><a href="projects.html" class="nav-link">Projects</a></li>
+            <li><a href="services.html" class="nav-link">Services</a></li>
+            <li><a href="contact.html" class="nav-link">Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="mobile-nav">
+          <button class="nav-close-btn" aria-label="Close menu">
+            <ion-icon name="close-outline"></ion-icon>
+          </button>
+        
+          <div class="wrapper">
+            <p class="h3 nav-title">Main Menu</p>
+            <ul>
+              <li class="nav-item">
+                <a href="index.html" class="nav-link active">Home</a>
+              </li>
+              <li class="nav-item">
+                <a href="about.html" class="nav-link">About Me</a>
+              </li>
+              <li class="nav-item">
+                <a href="projects.html" class="nav-link">Projects</a>
+              </li>
+              <li class="nav-item">
+                <a href="services.html" class="nav-link">Services</a>
+              </li>
+              <li class="nav-item">
+                <a href="contact.html" class="nav-link">Contact</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ======================
+      HERO SECTION
+  ========================= -->
+  <main>
+    <div class="hero">
+      <div class="container">
+        <div class="left">
+          <h1 class="h1">
+      Hi, I'm <b>Muhammad Saim&nbsp;Ayyaz</b>.
+            <br>"IT Engineer"
+          </h1>
+
+          <p class="h3">
+            Specialized in Full-Stack Development (React, .NET, C#), DevOps (Docker, AWS, CI/CD), and Software QA. Proficient in Python, Networking, and Agile Project Management.
+          </p>
+
+          <div class="btn-group">
+            <a href="contact.html" class="btn btn-primary">Hire Me</a>
+            <a href="projects.html" class="btn btn-secondary">See My Work</a>
+          </div>
+        </div>
+
+        <div class="right">
+          <div class="img-box">
+            <img src="./assets/images/profileimg.jpg.jpeg" alt="Muhammad Saim Ayyaz" class="hero-img">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="main">
+      <div class="container">
+        <!-- ======================
+            BLOG SECTION
+        ========================= -->
+        <div class="blog">
+          <h2 class="h2">Featured Projects</h2>
+
+          <div class="blog-card-group">
+            <!-- Blog Post 1 -->
+            <div class="blog-card">
+              <div class="blog-card-banner">
+                <img src="./assets/images/fsd.jpg.jpg" alt="Full Stack Development Project" width="250" class="blog-banner-img">
+              </div>
+              <div class="blog-content-wrapper">
+                <button class="blog-topic text-tiny">Full Stack Development</button>
+                <h3><a href="projects.html" class="h3">Safe Trade Hub (FYP)</a></h3>
+                <p class="blog-text">
+                  A secure Consumer-to-Consumer (C2C) Marketplace platform featuring end-to-end user verification, a trustee escrow system for safe transactions, and real-time product listings with chat functionality.
+                  
+                </p>
+                <div class="wrapper-flex">
+                  <div class="profile-wrapper">
+                    <img src="./assets/images/profileimg.jpg.jpeg" alt="Muhammad Saim Ayyaz" width="50">
+                  </div>
+                  <div class="wrapper">
+                    <a href="#" class="h4">Muhammad Saim Ayyaz</a>
+                    <p class="text-sm">
+                      <time datetime="2023-06-15">March 15, 2025</time>
+                      <span class="separator"></span>
+                      <ion-icon name="time-outline"></ion-icon>
+                      <time datetime="PT3M">5 min read</time>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Blog Post 2 -->
+            <div class="blog-card">
+              <div class="blog-card-banner">
+                <img src="./assets/images/devops.jpg.png" alt="CI/CD DevOps Pipeline" width="250" class="blog-banner-img">
+              </div>
+              <div class="blog-content-wrapper">
+                <button class="blog-topic text-tiny">DevOps</button>
+                <h3><a href="" class="h3">CI/CD DevOps Pipeline</a></h3>
+                <p class="blog-text">
+                  Designed and implemented an automated Continuous Integration/Continuous Deployment (CI/CD) pipeline to streamline code testing, building, and deployment processes.
+                </p>
+                <div class="wrapper-flex">
+                  <div class="profile-wrapper">
+                    <img src="./assets/images/profileimg.jpg.jpeg" alt="Muhammad Saim Ayyaz" width="50">
+                  </div>
+                  <div class="wrapper">
+                    <a href="#" class="h4">Muhammad Saim Ayyaz</a>
+                    <p class="text-sm">
+                      <time datetime="2025-04-10">April 10, 2025</time>
+                      <span class="separator"></span>
+                      <ion-icon name="time-outline"></ion-icon>
+                      <time datetime="PT4M">5 min</time>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Blog Post 3 -->
+            <div class="blog-card">
+              <div class="blog-card-banner">
+                <img src="./assets/images/webdev.jpg.jpg" alt="Web Development" width="250" class="blog-banner-img">
+              </div>
+              <div class="blog-content-wrapper">
+                <button class="blog-topic text-tiny">Web Development</button>
+                <h3><a href="" class="h3">Weather App & Blog Website</a></h3>
+                <p class="blog-text">
+                  A full-stack web application that fetches real-time weather data via APIs and includes a blog section for user-generated content with CRUD functionality.
+                </p>
+                <div class="wrapper-flex">
+                  <div class="profile-wrapper">
+                    <img src="./assets/images/profileimg.jpg.jpeg" alt="Muhammad Saim Ayyaz" width="50">
+                  </div>
+                  <div class="wrapper">
+                    <a href="#" class="h4">Muhammad Saim Ayyaz</a>
+                    <p class="text-sm">
+                      <time datetime="2025-03-28">March 28, 2025</time>
+                      <span class="separator"></span>
+                      <ion-icon name="time-outline"></ion-icon>
+                      <time datetime="PT6M">6 min</time>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <a href="projects.html" class="btn load-more">View All Projects</a>
+        </div>
+
+        <!-- ======================
+            ASIDE SECTION
+        ========================= -->
+        <div class="aside">
+          <div class="topics">
+            <h2 class="h2">Topics</h2>
+            <a href="#" class="topic-btn">
+              <div class="icon-box">
+                <ion-icon name="code-slash-outline"></ion-icon>
+              </div>
+              <p>Web Development</p>
+            </a>
+            <a href="#" class="topic-btn">
+              <div class="icon-box">
+                <ion-icon name="server-outline"></ion-icon>
+              </div>
+              <p>.NET & C#</p>
+            </a>
+            <a href="#" class="topic-btn">
+              <div class="icon-box">
+                <ion-icon name="shield-checkmark-outline"></ion-icon>
+              </div>
+              <p>DevOps</p>
+            </a>
+            <a href="#" class="topic-btn">
+              <div class="icon-box">
+                <ion-icon name="git-network-outline"></ion-icon>
+              </div>
+              <p>Networking</p>
+            </a>
+          </div>
+
+          <div class="tags">
+            <h2 class="h2">Tags</h2>
+            <div class="wrapper">
+              <button class="hashtag">#dotnet</button>
+              <button class="hashtag">#react</button>
+              <button class="hashtag">#python</button>
+              <button class="hashtag">#javascript</button>
+              <button class="hashtag">#webdev</button>
+              <button class="hashtag">#qa</button>
+              <button class="hashtag">#networking</button>
+              <button class="hashtag">#csharp</button>
+            </div>
+          </div>
+
+          <div class="contact">
+            <h2 class="h2">Let's Connect</h2>
+            <div class="wrapper">
+              <p>
+                Feel free to reach out through any of these platforms:
+              </p>
+              <ul class="social-link">
+                <li>
+                  <a href="https://www.linkedin.com/in/muhammad-saim-ayyaz-61a087319" class="icon-box linkedin" target="_blank" aria-label="LinkedIn">
+                    <ion-icon name="logo-linkedin"></ion-icon>
+                  </a>
+                </li>
+                <li>
+                  <a href="https://github.com/saimayyazsheikh" class="icon-box github" target="_blank" aria-label="GitHub">
+                    <ion-icon name="logo-github"></ion-icon>
+                  </a>
+                </li>
+                <li>
+                  <a href="https://www.instagram.com/cymonbike" class="icon-box instagram" target="_blank" aria-label="Instagram">
+                    <ion-icon name="logo-instagram"></ion-icon>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="newsletter">
+            <h2 class="h2">Newsletter</h2>
+            <div class="wrapper">
+              <p>
+                Subscribe to my newsletter for the latest articles and updates.
+              </p>
+              <form action="#">
+                <input type="email" name="email" placeholder="Email Address" required>
+                <button type="submit" class="btn btn-primary">Subscribe</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ======================
+      SERVICES PREVIEW
+  ========================= -->
+  <section class="services-preview">
+    <div class="container">
+      <h2 class="h2">How I Can Help You</h2>
+      <div class="services-grid">
+        <div class="service-card">
+          <ion-icon name="code-slash-outline"></ion-icon>
+          <h3>Web Development</h3>
+          <p>Custom solutions from simple sites to complex web apps</p>
+          <a href="services.html" class="btn-link">Learn more →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================
+      FOOTER SECTION
+  ========================= -->
+  <footer>
+    <div class="container">
+      <div class="wrapper">
+        <a href="#" class="footer-logo">
+          <img src="./assets/images/slogo.ico" alt="Muhammad Saim Ayyaz's Logo" width="250" height="200" class="logo-light">
+          <img src="./assets/images/slogo.ico" alt="Muhammad Saim Ayyaz's Logo" width="250" height="200" class="logo-dark">
+        </a>
+        
+      </div>
+
+      <div class="wrapper">
+        <p class="footer-title">Quick Links</p>
+        <ul>
+          <li><a href="index.html" class="footer-link">Home</a></li>
+          <li><a href="about.html" class="footer-link">About</a></li>
+          <li><a href="services.html" class="footer-link">Services</a></li>
+          <li><a href="contact.html" class="footer-link">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="wrapper">
+        <p class="footer-title">Legal</p>
+        <ul>
+          <li>
+            <a href="#" class="footer-link">Privacy Policy</a>
+          </li>
+          <li>
+            <a href="#" class="footer-link">Terms of Service</a>
+          </li>
+          <li>
+            <a href="#" class="footer-link">Cookie Policy</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="copyright">
+      &copy; Copyright 2025 <a href="#">Muhammad Saim Ayyaz</a>
+    </p>
+  </footer>
+
+  <!-- custom js link -->
+  <script src="./assets/js/script.min.js"></script>
+  <script src="./assets/js/animations.js"></script>
+
+  <!-- ionicon link -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  <script type="module" src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
+</body>
+</html>
